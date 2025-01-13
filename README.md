@@ -2,26 +2,24 @@
 
 👋 Seja bem-vindo(a)!
 
-É muito bom tê-lo(a) aqui. Tenho certeza que você vai amar esse curso. ❤️
+É muito bom tê-lo(a) aqui. 
 
-## O que você vai aprender?
+## Pré-requisitos
 
-- Como configurar um projeto Cypress do zero
-- Como visitar páginas locais e remotas
-- Como lidar com os elementos mais comuns encontrados em aplicações web
-- Como testar upload de arquivos
-- Como realizar as mais diversas verificações de resultados esperados
-- Como criar comandos customizados
-- Como lidar com links que abrem em outra aba do navegador
-- Como rodar testes simulando as dimensões de um dispositivo móvel
-- Como resolver os mesmos problemas de diferentes formas, conhecendo a [API do Cypress](https://docs.cypress.io/api/table-of-contents)
-- Como criar uma documentação mínima para seu projeto de testes automatizados
-- Como executar os testes em um _workflow_ de integração contínua sempre que mudanças ocorrerem no código da aplicação (ou dos testes)
-- Como integrar seu _workflow_ de integração contínua com o Cypress Cloud (o serviço de gestão de testes do Cypress na nuvem)
+É necessário ter o Node.js e o npm instalados para executar este projeto. 
 
-## Vamos começar?
+Atualmente utilizo as versões v22.12.0 do Node.js e v10.0.9 do npm. Sugiro utilizar versões iguais ou posteriores a esta, desde que seja versões de LTS.
 
-Vá para a seção [estrutura do curso](./lessons/_course-structure_.md).
+## Instalação
+
+Na pasta do projeto, execute o comando npm install (ou npm i para a versão curta) para instalar as dependências de desenvolvimento.
+
+Caso não possua o cypress instalado, pode executar o comando npm install cypress em seguida.
+
+## Antes de executar os testes
+
+Para executar o Cypress no modo interativo, execute o comando npx cypress open
+Para executar no modo headless, execute o comando npx cypress run
 
 ___
 
