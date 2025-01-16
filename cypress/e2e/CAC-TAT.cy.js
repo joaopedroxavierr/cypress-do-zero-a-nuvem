@@ -7,18 +7,25 @@ describe("Central de Atendimento ao Cliente TAT", () => {
   it("verifica o título da aplicação", () => {
     cy.title().should("be.equal", "Central de Atendimento ao Cliente TAT");
   }),
-    it("preenche os campos obrigatórios e envia o formulário", () => {
-      cy.get('input[name="firstName"]').type("João Pedro");
-      cy.get('input[name="lastName"]').type("Xavier");
-      cy.get('input#email[name="email"]').type("joao@tat.com");
-      cy.get('textarea[name="open-text-area"]').type(
-        "Parabéns pelo curso, muito bom! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus venenatis sapien vitae gravida. Nam hendrerit interdum nibh, eu aliquet ipsum egestas in. In at nisl fermentum, venenatis justo at, ornare sapien. Suspendisse placerat, urna id laoreet posuere, massa mauris fermentum nisi, vel fringilla dolor elit vel urna. Nullam vitae nunc gravida",
-        { delay: 0 }
-      );
-      cy.contains('button','Enviar').click();
-      cy.get(".success").should("be.visible");
-    }),
+    
+    Cypress._.times(3, () => {
+      it("preenche os campos obrigatórios e envia o formulário", () => {
+        cy.clock()
+        cy.get('input[name="firstName"]').type("João Pedro");
+        cy.get('input[name="lastName"]').type("Xavier");
+        cy.get('input#email[name="email"]').type("joao@tat.com");
+        cy.get('textarea[name="open-text-area"]').type(
+          "Parabéns pelo curso, muito bom! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus venenatis sapien vitae gravida. Nam hendrerit interdum nibh, eu aliquet ipsum egestas in. In at nisl fermentum, venenatis justo at, ornare sapien. Suspendisse placerat, urna id laoreet posuere, massa mauris fermentum nisi, vel fringilla dolor elit vel urna. Nullam vitae nunc gravida",
+          { delay: 0 }
+        );
+        cy.contains('button','Enviar').click();
+        cy.get(".success").should("be.visible");
+        cy.tick(3000)
+        cy.get(".success").should("not.be.visible");
+      })
+    })
     it("exibe mensagem de erro ao submeter o formulário com um email com formatação inválida", () => {
+      cy.clock()
       cy.get('input[name="firstName"]').type("João Pedro");
       cy.get('input[name="lastName"]').type("Xavier");
       cy.get('input#email[name="email"]').type("joaotat.com");
@@ -28,11 +35,14 @@ describe("Central de Atendimento ao Cliente TAT", () => {
       );
       cy.contains('button','Enviar').click();
       cy.get(".error").should("be.visible");
+      cy.tick(3000)
+      cy.get(".error").should("not.be.visible");
     }),
     it("valida que não será preenchido caracteres não-numéricos no campo de telefone", () => {
       cy.get('input#phone[name="phone"]').type("abc").should("have.value", "");
     }),
     it("exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário", () => {
+      cy.clock()
       cy.get('input[name="firstName"]').type("João Pedro");
       cy.get('input[name="lastName"]').type("Xavier");
       cy.get('input#email[name="email"]').type("joao@tat.com");
@@ -43,6 +53,8 @@ describe("Central de Atendimento ao Cliente TAT", () => {
       );
       cy.contains('button','Enviar').click();
       cy.get('span[class="error"]').should("be.visible");
+      cy.tick(3000)
+      cy.get('span[class="error"]').should("not.be.visible");
     }),
     it("preenche e limpa os campos nome, sobrenome, email e telefone", () => {
       cy.get('input[name="firstName"]')
@@ -63,9 +75,12 @@ describe("Central de Atendimento ao Cliente TAT", () => {
       cy.get('input#phone[name="phone"]').clear().should("have.value", "");
     }),
     it("exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios", () => {
+      cy.clock()
       cy.contains('button','Enviar').click();
       cy.get('span[class="error"]').should("be.visible");
       cy.get('span[class="error"]').contains("Valide os campos obrigatórios!");
+      cy.tick(3000)
+      cy.get('span[class="error"]').should("not.be.visible");
     });
 
     it('envia o formuário com sucesso usando um comando customizado', () => {
@@ -76,9 +91,13 @@ describe("Central de Atendimento ao Cliente TAT", () => {
         text: 'Teste.'
       }
 
+      cy.clock()
+
       cy.fillMandatoryFieldsAndSubmit(data)
 
-      cy.get('.success').should('be.visible')
+      cy.get('.success').should("be.visible");
+      cy.tick(3000)
+      cy.get('.success').should("not.be.visible");
     });
 
     it('seleciona um produto (YouTube) por seu texto', () => {
@@ -123,6 +142,7 @@ describe("Central de Atendimento ao Cliente TAT", () => {
     });
 
     it("exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário", () => {
+      cy.clock()
       cy.get('input[name="firstName"]').type("João Pedro");
       cy.get('input[name="lastName"]').type("Xavier");
       cy.get('input#email[name="email"]').type("joao@tat.com");
@@ -133,6 +153,8 @@ describe("Central de Atendimento ao Cliente TAT", () => {
       );
       cy.contains('button','Enviar').click();
       cy.get('span[class="error"]').should("be.visible");
+      cy.tick(3000)
+      cy.get('span[class="error"]').should("not.be.visible");
     });
 
     it('seleciona um arquivo da pasta fixtures', () => {
