@@ -4,7 +4,6 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     strategy:
-    fail-fast: false
     matrix:
       containers: [1, 2, 3]
     steps:
